@@ -16,13 +16,11 @@
 //});
 
 Route::get('/', 'HomeController@index');
-Route::get('/articles', 'ArticlesController@index');
-Route::get('/articles/{post_name}', 'ArticlesController@show');
-Route::post('/articles/{post_name}', 'ArticlesController@store');
+Route::post('/articles/{post_name}', 'ArticlesController@storeComment');
 Route::get('contact', 'ContactController@create');
 Route::post('contact', 'ContactController@store');
 
-Route::resource('/admin/articles', 'AdminArticlesController');
+Route::resource('/articles', 'ArticlesController');
 
 Auth::routes();
 

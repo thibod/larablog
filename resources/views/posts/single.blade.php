@@ -34,4 +34,8 @@
         <input type="hidden" name="post_id" id="post_id" value="{{$post->id}}">
         <button type="submit" class="btn btn-secondary">Envoyer !</button>
     </form>
+
+    @auth
+        <a href="/articles/{{$post->post_name}}/edit">EDITER</a>
+    @endauth
 @endsection

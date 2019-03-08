@@ -1,7 +1,7 @@
-@extends('layouts/main')
+@extends('layouts/true')
 
 @section('content')
-    <form action="{{ url('/admin/articles') }}" method="POST">
+    <form action="{{ url('/articles') }}" method="POST">
         {{ csrf_field() }}
         <div class="form-group">
             <input type="text" class="form-control {{ $errors->has('user_id') ? 'is-invalid' : '' }}" name="user_id" id="user_id" placeholder="Auteur (id)"

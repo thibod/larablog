@@ -1,4 +1,4 @@
-@extends('layouts/main')
+@extends('layouts/true')
 
 @section('content')
     <form action="/admin/articles/{{$post->post_name}}" method="POST">
