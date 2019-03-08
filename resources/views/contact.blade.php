@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts/true')
 
 @section('content')
     <h1>Liste des demandes de contact</h1>

@@ -1,4 +1,4 @@
-@extends('layouts/main')
+@extends('layouts/true')
 
 @section('content')
     <h1>{{$post->post_title}}</h1>

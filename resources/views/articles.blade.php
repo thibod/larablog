@@ -1,4 +1,4 @@
-@extends('layouts/main')
+@extends('layouts/true')
 
 @section('content')
     @foreach($posts as $post)

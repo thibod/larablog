@@ -23,3 +23,7 @@ Route::get('contact', 'ContactController@create');
 Route::post('contact', 'ContactController@store');
 
 Route::resource('/admin/articles', 'AdminArticlesController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
