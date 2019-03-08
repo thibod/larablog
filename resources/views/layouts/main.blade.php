@@ -21,7 +21,7 @@
 
 <div class="callout large primary">
     <div class="row column text-center">
-        <h1>Le Larablog de Tibodé</h1>
+        <h1>Le Larablog de Thibodé</h1>
         <h2 class="subheader">Un blog fait avec Laravel et par Thibodé</h2>
     </div>
 </div>

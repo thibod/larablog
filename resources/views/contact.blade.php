@@ -36,8 +36,8 @@
                             <div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            <textarea class="form-control {{ $errors->has('contact_message') ? 'is-invalid' : '' }}" name="contact_message" id="contact_message" placeholder="Votre message">{{ old('contact_message') }}</textarea>                            {!! $errors->first('contact_message', '
-                            <div class="invalid-feedback">:message</div>') !!}
+            <textarea class="form-control {{ $errors->has('contact_message') ? 'is-invalid' : '' }}" name="contact_message" id="contact_message" placeholder="Votre message">{{ old('contact_message') }}</textarea>
+            {!! $errors->first('contact_message', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <button type="submit" class="btn btn-secondary">Envoyer !</button>
     </form>

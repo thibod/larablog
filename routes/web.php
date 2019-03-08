@@ -21,3 +21,5 @@ Route::get('/articles/{post_name}', 'ArticlesController@show');
 Route::post('/articles/{post_name}', 'ArticlesController@store');
 Route::get('contact', 'ContactController@create');
 Route::post('contact', 'ContactController@store');
+
+Route::resource('/admin/articles', 'AdminArticlesController');

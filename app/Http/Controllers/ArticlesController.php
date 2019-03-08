@@ -9,11 +9,14 @@ use Illuminate\Http\Request;
 class ArticlesController extends Controller
 {
     public function index() {
-        return view('articles');
+        $posts = \App\Post::all();
+        return view('articles', array(
+            'posts' => $posts
+        ));
     }
 
     public function show($post_name) {
-        $post = \App\Post::with('comments')->where('post_name',$post_name)->first(); //get post
+        $post = \App\Post::all()->where('post_name',$post_name)->first(); //get post
         return view('posts/single',array( //Pass the post to the view
             'post' => $post
         ));
