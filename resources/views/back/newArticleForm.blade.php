@@ -28,8 +28,6 @@
             {!! $errors->first('post_content', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
-        <input type="hidden" name="user_id" id="user_id" value={{$user_id}}>
-
         <button type="submit" class="btn btn-secondary">Envoyer !</button>
     </form>
 @endsection

@@ -40,10 +40,7 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        $user_id = Auth::id();
-        return view('back/newArticleForm', array(
-            'user_id' => $user_id
-        ));
+        return view('back/newArticleForm');
     }
 
     /**
@@ -54,6 +51,8 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
+        $user_id = Auth::id();
+
         $post = new Post();
         $post->post_name = request('post_name');
         $post->post_status = request('post_status');
@@ -62,7 +61,7 @@ class ArticlesController extends Controller
         $post->post_content = request('post_content');
         $post->post_type = 'article';
         $post->post_date = now();
-        $post->user_id = request('user_id');
+        $post->user_id = $user_id;
         $post->save();
         return $this->index();
     }
@@ -110,8 +109,6 @@ class ArticlesController extends Controller
         $post->post_category = request('post_category');
         $post->post_title = request('post_title');
         $post->post_content = request('post_content');
-        $post->user_id = request('user_id');
-        $post->post_name = request('post_name');
         $post->save();
 
         return $this->show($post_name);
@@ -135,14 +132,16 @@ class ArticlesController extends Controller
         ]);
     }
 
-    public function storeComment(CommentRequest $request)
+    public function storeComment(CommentRequest $request, $post_name)
     {
+        $post = Post::all()->where('post_name',$post_name)->first(); //get post
+
         $comment = new Comment();
         $comment->comment_name = request('comment_name');
         $comment->comment_email = request('comment_email');
         $comment->comment_content = request('comment_content');
         $comment->comment_date = now();
-        $comment->post_id = request ('post_id');
+        $comment->post_id = $post->id;
         $comment->save(); // on enregistre dans la base
         return back();
     }

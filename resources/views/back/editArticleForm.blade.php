@@ -1,7 +1,7 @@
 @extends('layouts/true')
 
 @section('content')
-    <form action="/admin/articles/{{$post->post_name}}" method="POST">
+    <form action="/articles/{{$post->post_name}}" method="POST">
 
         {{ csrf_field() }}
 
@@ -25,8 +25,6 @@
             {!! $errors->first('post_content', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
-        <input type="hidden" name="post_name" id="post_name" value="{{$post->post_name}}">
-        <input type="hidden" name="user_id" id="user_id" value="{{$post->user_id}}">
 
 
         <input type="hidden" name="_method" value="PATCH">
