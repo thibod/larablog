@@ -15,13 +15,16 @@
     @foreach($posts as $post)
         <ul>
             <li>
-                <a href="/articles/{{$post->post_name}}">{{$post->post_title}} by {{$post->user->name}} on {{$post->post_date}}</a>
+                <a href="/articles/{{$post->post_name}}">{{$post->post_title}} by {{$post->user->name}}
+                    on {{$post->post_date}}</a>
                 @auth
-                    <form action="/articles/{{$post->post_name}}"  method="POST">
-                        {{ csrf_field() }}
-                        <button type="submit" class="btn btn-secondary">DELETE !</button>
-                        <input type="hidden" name="_method" value="DELETE">
-                    </form>
+                    @can('delete', $post)
+                        <form action="/articles/{{$post->post_name}}" method="POST">
+                            {{ csrf_field() }}
+                            <button type="submit" class="btn btn-secondary">DELETE !</button>
+                            <input type="hidden" name="_method" value="DELETE">
+                        </form>
+                    @endcan
                 @endauth
             </li>
         </ul>

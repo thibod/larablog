@@ -126,10 +126,13 @@ class ArticlesController extends Controller
      *
      * @param $post_name
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($post_name)
     {
         $post = Post::all()->where('post_name',$post_name)->first(); //get post
+
+        $this->authorize('delete', $post);
 
         $post->delete();
 
