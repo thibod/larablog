@@ -85,10 +85,14 @@ class ArticlesController extends Controller
      *
      * @param $post_name
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($post_name)
     {
         $post = Post::all()->where('post_name',$post_name)->first(); //get post
+
+        $this->authorize('update', $post);
+
         return view('back/editArticleForm', array(
             'post' => $post
         ));
@@ -100,10 +104,13 @@ class ArticlesController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param $post_name
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(Request $request, $post_name)
     {
         $post = Post::all()->where('post_name',$post_name)->first(); //get post
+
+        $this->authorize('update', $post);
 
         $post->post_status = request('post_status');
         $post->post_category = request('post_category');
@@ -124,7 +131,6 @@ class ArticlesController extends Controller
     {
         $post = Post::all()->where('post_name',$post_name)->first(); //get post
 
-        //        dd($post);
         $post->delete();
 
         return redirect()->route('articles.index')->with([
