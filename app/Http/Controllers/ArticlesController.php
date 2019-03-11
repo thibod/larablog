@@ -6,6 +6,7 @@ use App\Comment;
 use App\Http\Requests\CommentRequest;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticlesController extends Controller
 {
@@ -39,7 +40,10 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        return view('back/newArticleForm');
+        $user_id = Auth::id();
+        return view('back/newArticleForm', array(
+            'user_id' => $user_id
+        ));
     }
 
     /**

@@ -4,11 +4,6 @@
     <form action="{{ url('/articles') }}" method="POST">
         {{ csrf_field() }}
         <div class="form-group">
-            <input type="text" class="form-control {{ $errors->has('user_id') ? 'is-invalid' : '' }}" name="user_id" id="user_id" placeholder="Auteur (id)"
-                   value="{{ old('user_id') }}"> {!! $errors->first('user_id', '
-                                <div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
             <input type="text" class="form-control {{ $errors->has('post_name') ? 'is-invalid' : '' }}" name="post_name" id="post_name" placeholder="Nom de l'article"
                    value="{{ old('post_name') }}"> {!! $errors->first('post_name', '
                                 <div class="invalid-feedback">:message</div>') !!}
@@ -32,6 +27,8 @@
             <textarea class="form-control {{ $errors->has('post_content') ? 'is-invalid' : '' }}" name="post_content" id="post_content" placeholder="Contenu de l'article">{{ old('post_content') }}</textarea>
             {!! $errors->first('post_content', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+
+        <input type="hidden" name="user_id" id="user_id" value={{$user_id}}>
 
         <button type="submit" class="btn btn-secondary">Envoyer !</button>
     </form>
