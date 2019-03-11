@@ -22,7 +22,7 @@ class CreatePostsTable extends Migration
             $table->text('post_content');
             $table->text('post_title');
             $table->string('post_status', 20)->default('publish');
-            $table->string('post_name', 200)->default('');
+            $table->string('post_name', 200)->unique();
             $table->string('post_type', 20)->default('article');
             $table->text('post_category')->nullable();
 
