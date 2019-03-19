@@ -155,6 +155,9 @@ class ArticlesController extends Controller
         $post = Post::all()->where('post_name',$post_name)->first(); //get post
 
         $comment = new Comment();
+
+        event(new CommentPublished);
+
         $comment->comment_name = request('comment_name');
         $comment->comment_email = request('comment_email');
         $comment->comment_content = request('comment_content');
