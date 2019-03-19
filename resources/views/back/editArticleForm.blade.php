@@ -1,7 +1,7 @@
 @extends('layouts/true')
 
 @section('content')
-    <form action="/articles/{{$post->post_name}}" method="POST">
+    <form action="/articles/{{$post->post_name}}" method="POST" enctype="multipart/form-data">
 
         {{ csrf_field() }}
 
@@ -25,7 +25,8 @@
             {!! $errors->first('post_content', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
-
+        <label for="avatar">Editer l'image</label>
+        <input type="file" id="post_image" name="post_image" accept="image/png, image/jpeg" class="form-control">
 
         <input type="hidden" name="_method" value="PATCH">
         <button type="submit" class="btn btn-secondary">Envoyer !</button>

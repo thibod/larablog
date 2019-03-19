@@ -108,7 +108,7 @@ class ArticlesController extends Controller
      * @return \Illuminate\Http\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(Request $request, $post_name)
+    public function update(Request $request, $post_name, PhotosRepositoryInterface $photosRepository)
     {
         $post = Post::all()->where('post_name',$post_name)->first(); //get post
 
@@ -118,6 +118,9 @@ class ArticlesController extends Controller
         $post->post_category = request('post_category');
         $post->post_title = request('post_title');
         $post->post_content = request('post_content');
+        if (request('post_image')) {
+            $post->post_image = $photosRepository->fileUpload($request);
+        }
         $post->save();
 
         return $this->show($post_name);
@@ -159,13 +162,5 @@ class ArticlesController extends Controller
         $comment->post_id = $post->id;
         $comment->save(); // on enregistre dans la base
         return back();
-    }
-
-    public function storeImage(ImagesRequest $request, PhotosRepositoryInterface $photosRepository)
-    {
-        $photosRepository->save($request->image);
-        return view('posts/single',array( //Pass the post to the view
-            'post' => $post
-        ));
     }
 }
