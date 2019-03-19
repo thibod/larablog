@@ -17,15 +17,13 @@
             <li>
                 <a href="/articles/{{$post->post_name}}">{{$post->post_title}} by {{$post->user->name}}
                     on {{$post->post_date}}</a>
-                @auth
-                    @can('delete', $post)
-                        <form action="/articles/{{$post->post_name}}" method="POST">
-                            {{ csrf_field() }}
-                            <button type="submit" class="btn btn-secondary">DELETE !</button>
-                            <input type="hidden" name="_method" value="DELETE">
-                        </form>
-                    @endcan
-                @endauth
+                @can('delete', $post)
+                    <form action="/articles/{{$post->post_name}}" method="POST">
+                        {{ csrf_field() }}
+                        <button type="submit" class="btn btn-secondary">DELETE !</button>
+                        <input type="hidden" name="_method" value="DELETE">
+                    </form>
+                @endcan
             </li>
         </ul>
     @endforeach

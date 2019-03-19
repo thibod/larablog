@@ -1,7 +1,7 @@
 @extends('layouts/true')
 
 @section('content')
-    <form action="{{ url('/articles') }}" method="POST">
+    <form action="{{ url('/articles') }}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="form-group">
             <input type="text" class="form-control {{ $errors->has('post_name') ? 'is-invalid' : '' }}" name="post_name" id="post_name" placeholder="Nom de l'article"
@@ -27,6 +27,9 @@
             <textarea class="form-control {{ $errors->has('post_content') ? 'is-invalid' : '' }}" name="post_content" id="post_content" placeholder="Contenu de l'article">{{ old('post_content') }}</textarea>
             {!! $errors->first('post_content', '<div class="invalid-feedback">:message</div>') !!}
         </div>
+
+        <label for="avatar">Ajouter une image</label>
+        <input type="file" id="post_image" name="post_image" accept="image/png, image/jpeg" class="form-control">
 
         <button type="submit" class="btn btn-secondary">Envoyer !</button>
     </form>

@@ -25,6 +25,7 @@ class CreatePostsTable extends Migration
             $table->string('post_name', 200)->unique();
             $table->string('post_type', 20)->default('article');
             $table->text('post_category')->nullable();
+            $table->string('post_image')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users');
 

@@ -4,7 +4,10 @@
     <h1>{{$post->post_title}}</h1>
     <h2>By {{$post->user->name}}</h2>
     <div>{{$post->post_content}}</div>
-
+    @if($post->post_image)
+        <img src="/storage/{{$post->post_image}}" />
+    @endif
+    
     <br/><br/><br/>
     @foreach($post->comments as $comment)
         <ul>

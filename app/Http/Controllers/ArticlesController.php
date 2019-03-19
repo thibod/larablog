@@ -7,6 +7,7 @@ use App\Http\Requests\CommentRequest;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\PhotosRepositoryInterface;
 
 class ArticlesController extends Controller
 {
@@ -17,7 +18,7 @@ class ArticlesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'storeComment']]);
     }
 
     /**
@@ -49,9 +50,9 @@ class ArticlesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, PhotosRepositoryInterface $photosRepository)
     {
-        $user_id = Auth::id();
+        $user_id = Auth::id(); // on récupère l'id de l'utilisateur actuel (logged in);
 
         $post = new Post();
         $post->post_name = request('post_name');
@@ -61,6 +62,7 @@ class ArticlesController extends Controller
         $post->post_content = request('post_content');
         $post->post_type = 'article';
         $post->post_date = now();
+        $post->post_image = $photosRepository->fileUpload($request);
         $post->user_id = $user_id;
         $post->save();
         return $this->index();
@@ -134,6 +136,10 @@ class ArticlesController extends Controller
 
         $this->authorize('delete', $post);
 
+        foreach ($post->comments as $comment) {
+            $comment->delete();
+        }
+
         $post->delete();
 
         return redirect()->route('articles.index')->with([
@@ -153,5 +159,13 @@ class ArticlesController extends Controller
         $comment->post_id = $post->id;
         $comment->save(); // on enregistre dans la base
         return back();
+    }
+
+    public function storeImage(ImagesRequest $request, PhotosRepositoryInterface $photosRepository)
+    {
+        $photosRepository->save($request->image);
+        return view('posts/single',array( //Pass the post to the view
+            'post' => $post
+        ));
     }
 }
