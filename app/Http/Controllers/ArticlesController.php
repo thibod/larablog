@@ -8,6 +8,7 @@ use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\PhotosRepositoryInterface;
+use App\Events\CommentPublished;
 
 class ArticlesController extends Controller
 {
@@ -156,14 +157,16 @@ class ArticlesController extends Controller
 
         $comment = new Comment();
 
-        event(new CommentPublished);
-
         $comment->comment_name = request('comment_name');
         $comment->comment_email = request('comment_email');
         $comment->comment_content = request('comment_content');
         $comment->comment_date = now();
         $comment->post_id = $post->id;
         $comment->save(); // on enregistre dans la base
+
+        
+        event(new CommentPublished($comment));
+
         return back();
     }
 }

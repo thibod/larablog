@@ -27,6 +27,6 @@ class CommentPublished
      */
     public function handle($event)
     {
-        // Mail::to($request->user())->send(new NewComment($post)); // PAS FINI
+        Mail::to('admin@admin.com')->send(new NewComment($event->comment));
     }
 }

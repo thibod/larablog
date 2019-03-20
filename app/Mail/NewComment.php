@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Post;
+use App\Comment;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -13,20 +13,20 @@ class NewComment extends Mailable
     use Queueable, SerializesModels;
 
     /**
-     * The post instance.
+     * The comment instance.
      *
-     * @var Post
+     * @var Comment
      */
-    protected $post;
+    public $comment;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Comment $comment)
     {
-        $this->post = $post;
+        $this->comment = $comment;
     }
 
     /**
